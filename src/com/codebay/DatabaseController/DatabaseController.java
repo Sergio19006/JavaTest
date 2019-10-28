@@ -3,9 +3,7 @@ package com.codebay.DatabaseController;
 import com.codebay.user.User;
 import com.google.gson.Gson;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -38,21 +36,22 @@ public class DatabaseController {
     }
 
     public void listActiveUsers() {
+        System.out.println("List of active users");
         for (User user : userArray) {
             if (user.active)
                 System.out.println(user.name);
         }
     }
 
-    public void listCityByLetter(char letter) {
+    public void listCityByLetter(String character) {
         for (User user : userArray) {
-            if (user.city.indexOf(letter) == 0)
-                System.out.println(user.city);
+            if (user.city.indexOf(character) == 0)
+                System.out.println(user.name);
         }
     }
 
     public void listByCreationDate(boolean ascending) throws ParseException {
-        ArrayList<Date> dates = new ArrayList<Date>();
+        ArrayList<Date> dates = new ArrayList<>();
 
         for (User user: userArray)
             dates.add(format.parse(user.creationDate));
@@ -62,7 +61,9 @@ public class DatabaseController {
             dates.sort(Collections.reverseOrder());
 
         for (Date date: dates)
-            System.out.println(date);
+            for (User user: userArray)
+                if(date.compareTo(format.parse(user.creationDate)) == 0)
+                    System.out.println("User: " + user.name + " Creation date: " + date);
     }
 
     public void addUser(String name, String surname, boolean active, String email, String city) throws IOException {
@@ -86,5 +87,27 @@ public class DatabaseController {
     private User CreateUser(String name, String surname, boolean active, String email, String city) {
         String date = format.format(new Date());
         return new User(name, surname, active, email, city, date);
+    }
+
+    public ArrayList<String> menuToAddUser() throws IOException {
+        BufferedReader br = null;
+        br = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<String> userData = new ArrayList<>();
+        System.out.println("Enter the user's name:");
+        String dummy = br.readLine();
+        userData.add(dummy);
+        System.out.println("Enter the user's surname:");
+        dummy = br.readLine();
+        userData.add(dummy);
+        System.out.println("Enter 'true' or 'false' to the activate attribute:");
+        dummy = br.readLine();
+        userData.add(dummy);
+        System.out.println("Enter the user's email:");
+        dummy = br.readLine();
+        userData.add(dummy);
+        System.out.println("Enter the user's city:");
+        dummy = br.readLine();
+        userData.add(dummy);
+        return userData;
     }
 }
