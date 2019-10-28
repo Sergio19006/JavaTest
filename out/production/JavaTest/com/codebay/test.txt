@@ -1,4 +1,0 @@
-[{"name":"Stand","surname":"Smith","active":false,"email":"ssmith@gmail.com","city":"London","creationDate":"2019-10-26 16:53:53"},
-{"name":"Sergio","surname":"delPino","active":true,"email":"sdpino@gmail.com","city":"albacete","creationDate":"2019-10-26 16:53:37"},
-{"name":"pepe","surname":"garcia","active":true,"email":"pgarcia@gmail.com","city":"Sc Tenerife","creationDate":"2019-10-28 10:20:44"},
-{"name":"alfonso","surname":"luis","active":false,"email":"aluis@gmail.com","city":"Madrid","creationDate":"2019-10-28 10:21:35"}]
