@@ -73,7 +73,8 @@ public class DatabaseController {
     private void addUser() {
         LocalDateTime date = LocalDateTime.now();
         ArrayList<String> userData = getUserData();
-        database.addUser(userData.get(0), userData.get(1), Boolean.parseBoolean(userData.get(2)), userData.get(3), userData.get(4), date);
+        database.addUser(userData.get(0), userData.get(1), Boolean.parseBoolean(userData.get(2)),
+                userData.get(3), userData.get(4),userData.get(5), date);
     }
 
     private ArrayList<String> getUserData() {
@@ -85,6 +86,7 @@ public class DatabaseController {
             userData.add(getActivate());
             userData.add(getEmail());
             userData.add(getCity());
+            userData.add(getBday());
             return userData;
         } catch (Exception e) {
             System.out.println(e);
@@ -199,5 +201,24 @@ public class DatabaseController {
             System.out.println(e);
         }
         return false;
+    }
+
+    private String getBday() {
+        String option = "";
+        boolean error = true;
+        try {
+            while (error) {
+                error = false;
+                System.out.println("Enter your Birthday with format: yyyy-mm-dd");
+                option = br.readLine();
+                if (!Helper.checkFormat(option)) {
+                    error = true;
+                }
+            }
+            return option;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "";
     }
 }

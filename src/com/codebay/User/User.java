@@ -7,16 +7,18 @@ public class User {
     public String email;
     public String city;
     public String creationDate;
+    public String bday;
 
     public User() {}
 
-    public User(String name, String surname, boolean active, String email, String city, String date) {
+    public User(String name, String surname, boolean active, String email, String city, String bday, String date) {
         this.name = name;
         this.surname = surname;
         this.active = active;
         this.email = email;
         this.city = city;
         this.creationDate = date;
+        this.bday = bday;
     }
 
     @Override

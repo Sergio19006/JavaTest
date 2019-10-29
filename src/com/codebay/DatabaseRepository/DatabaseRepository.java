@@ -84,8 +84,8 @@ public class DatabaseRepository {
             }
     }
 
-    public void addUser(String name, String surname, boolean active, String email, String city, LocalDateTime date) {
-        User newUser = createUser(name, surname, active, email, city, date);
+    public void addUser(String name, String surname, boolean active, String email, String city, String bday, LocalDateTime date) {
+        User newUser = createUser(name, surname, active, email, city, bday, date);
 
         StringBuilder dataToWrite = new StringBuilder("[");
 
@@ -108,9 +108,9 @@ public class DatabaseRepository {
         }
     }
 
-    private User createUser(String name, String surname, boolean active, String email, String city, LocalDateTime d) {
+    private User createUser(String name, String surname, boolean active, String email, String city, String bday,LocalDateTime d) {
         String date = d.toString();
-        return new User(name, surname, active, email, city, date);
+        return new User(name, surname, active, email, city, bday, date);
     }
 
 }

@@ -1,3 +1,2 @@
-[{"name":"sergio","surname":"del inito","active":true,"email":"sergio223@gmail.com","city":"London","creationDate":"2019-10-29T11:30:58.707707"},
-  {"name":"luis","surname":"perez","active":false,"email":"lperez@gmail.com","city":"SC Tenerife","creationDate":"2019-10-29T11:36:13.620989"},
-  {"name":"pepe","surname":"lopez","active":true,"email":"pepe@gmail.com","city":"Londres","creationDate":"2019-10-29T11:35:22.866013"}]
+[{"name":"sergio","surname":"surname","active":true,"email":"fneifn@gmail.com","city":"city","creationDate":"2019-10-29T13:20:42.311933","bday":"1997-06-19"},
+{"name":"pedro","surname":"hernandez","active":true,"email":"phernandez@gmail.com","city":"Madrid","creationDate":"2019-10-29T13:21:32.131742","bday":"1989-10-10"}]

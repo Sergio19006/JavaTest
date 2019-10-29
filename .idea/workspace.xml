@@ -6,7 +6,8 @@
       <change beforePath="$PROJECT_DIR$/out/production/JavaTest/com/codebay/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaTest/com/codebay/test.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/codebay/DatabaseController/DatabaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/DatabaseController/DatabaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/codebay/DatabaseRepository/DatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/DatabaseRepository/DatabaseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/codebay/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/codebay/Helper/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/Helper/Helper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/codebay/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/User/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/codebay/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/test.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
