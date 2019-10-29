@@ -1,26 +1,26 @@
 package com.codebay.DatabaseController;
 
 import com.codebay.DatabaseRepository.DatabaseRepository;
-import com.sun.jdi.event.ExceptionEvent;
+import com.codebay.Helper.Helper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class DatabaseController {
 
-    DatabaseRepository database;
+    private DatabaseRepository database;
     private BufferedReader br;
-    private Object ParseException;
 
     public DatabaseController(String path) throws IOException {
         database = new DatabaseRepository(path);
-        this.br = new BufferedReader(new InputStreamReader(System.in));
-        /*
-        ArrayList<String> data = database.menuToAddUser();
-        database.addUser(data.get(0),data.get(1),Boolean.parseBoolean(data.get(2)),data.get(3),data.get(4));
-        */
+        try {
+            this.br = new BufferedReader(new InputStreamReader(System.in));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void dispatch(int option) throws IOException {
@@ -33,6 +33,9 @@ public class DatabaseController {
                 break;
             case 3:
                 listByCreationDate();
+                break;
+            case 4:
+                addUser();
                 break;
         }
     }
@@ -51,7 +54,7 @@ public class DatabaseController {
                 System.out.println("Error. only one character permited");
                 System.exit(-1);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error. IOException");
             System.exit(-1);
         }
@@ -59,17 +62,138 @@ public class DatabaseController {
 
     private void listByCreationDate() {
         try {
-            System.out.println("Enter 'ascending' or 'descending' to sort users by Creation Date");
-            String option = br.readLine();
-            if (option.equals("ascending"))
-                database.listByCreationDate(true);
-            else
-                database.listByCreationDate(false);
+            boolean option;
+            option = getSortedBy();
+            database.listByCreationDate(option);
         } catch (Exception e) {
-            if (e == ParseException) {
-                System.out.println("ParseException");
-                System.exit(-1);
-            }
+            System.out.println(e);
         }
+    }
+
+    private void addUser() {
+        LocalDateTime date = LocalDateTime.now();
+        ArrayList<String> userData = getUserData();
+        database.addUser(userData.get(0), userData.get(1), Boolean.parseBoolean(userData.get(2)), userData.get(3), userData.get(4), date);
+    }
+
+    private ArrayList<String> getUserData() {
+        ArrayList<String> userData = new ArrayList<>();
+
+        try {
+            userData.add(getName("name"));
+            userData.add(getName("surname"));
+            userData.add(getActivate());
+            userData.add(getEmail());
+            userData.add(getCity());
+            return userData;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    //Error here. Ask Jose. Need Refactor
+    private String getName(String type) {
+        String data = "";
+        boolean error = true;
+        try {
+            while (error) {
+                error = false;
+                System.out.println("Enter the user's " + type + " : ");
+                data = br.readLine();
+                if (Helper.containsNumbers(data)) {//doesnt work :(
+                    System.out.println("Please enter a " + type + " without numbers");
+                    error = true;
+                }
+                if (Helper.tooShort(data)) {
+                    System.out.println("Please enter a " + type + " with at least 3 character");
+                    error = true;
+                }
+            }
+            return data;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "";
+    }
+
+    private String getActivate() {
+        String data = "";
+        boolean error = true;
+        try {
+            while (error) {
+                error = false;
+                System.out.println("Enter 'true' or 'false' to set the activate params");
+                data = br.readLine();
+                if (!Helper.trueOrFalse(data)) {
+                    System.out.println("Please enter a correct option");
+                    error = true;
+                }
+            }
+            return data;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "";
+    }
+
+    private String getEmail() {
+        String data = "";
+        boolean error = true;
+        try {
+            while (error) {
+                error = false;
+                System.out.println("Enter your email");
+                data = br.readLine();
+                if (!Helper.isEmail(data)) {
+                    System.out.println("Please enter a correct email");
+                    error = true;
+                }
+            }
+            return data;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "";
+    }
+
+    private String getCity() {
+        String data = "";
+        boolean error = true;
+        try {
+            while (error) {
+                error = false;
+                System.out.println("Enter your city");
+                data = br.readLine();
+                if (Helper.tooShort(data)) {
+                    System.out.println("Please enter a city with at least 3 character");
+                    error = true;
+                }
+            }
+            return data;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "";
+    }
+
+    private boolean getSortedBy() {
+        String option = "";
+        boolean error = true;
+        try {
+            while (error) {
+                error = false;
+                System.out.println("Enter 'ascending' or 'descending' to sort users by Creation Date.");
+                option = br.readLine();
+                if (!Helper.isAscendingOrDescending(option)) {
+                    System.out.println("Enter a correct option");
+                    error = true;
+                }
+            }
+            return Boolean.parseBoolean(option);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
     }
 }

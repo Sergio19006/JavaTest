@@ -1,6 +1,4 @@
-package com.codebay.user;
-
-import java.util.ArrayList;
+package com.codebay.User;
 
 public class User {
     public String name;

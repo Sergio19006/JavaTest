@@ -1,11 +1,12 @@
 package com.codebay.DatabaseRepository;
 
-import com.codebay.user.User;
+import com.codebay.User.User;
 import com.google.gson.Gson;
 
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,31 +15,38 @@ import java.util.Date;
 
 public class DatabaseRepository {
 
+    static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
     private ArrayList<User> users = new ArrayList<>();
     private String file;
     private Gson gson = new Gson();
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat format = new SimpleDateFormat();
 
-    public DatabaseRepository(String file) throws IOException {
+    public DatabaseRepository(String file) {
         this.file = file;
         String contentFile = readFile();
         User[] users = gson.fromJson(contentFile, User[].class);
         this.users.addAll(Arrays.asList(users));
     }
 
-    private String readFile() throws IOException {
-        FileReader reader = new FileReader(this.file);
-        StringBuilder contentFile = new StringBuilder();
+    private String readFile(){
 
-        //Read all content file to a string to create the array of users
+        try {
+            FileReader reader = new FileReader(this.file);
+            StringBuilder contentFile = new StringBuilder();
 
-        int ch;
-        while ((ch = reader.read()) != -1) {
-            char readCharacter = (char) ch;
-            contentFile.append(readCharacter);
+            //Read all content file to a string to create the array of users
+            int ch;
+            while ((ch = reader.read()) != -1) {
+                char readCharacter = (char) ch;
+                contentFile.append(readCharacter);
+            }
+            reader.close();
+            return contentFile.toString();
+        } catch (Exception e){
+            System.out.println(e);
         }
-        reader.close();
-        return contentFile.toString();
+        return "";
+
     }
 
     public void listActiveUsers() {
@@ -57,6 +65,7 @@ public class DatabaseRepository {
         }
     }
 
+    //Refactor here to LocalDateTime
     public void listByCreationDate(boolean ascending) throws ParseException {
         ArrayList<Date> dates = new ArrayList<>();
 
@@ -73,13 +82,14 @@ public class DatabaseRepository {
                     System.out.println(user);
     }
 
-    public void addUser(String name, String surname, boolean active, String email, String city) throws IOException {
-        User newUser = createUser(name, surname, active, email, city);
+    public void addUser(String name, String surname, boolean active, String email, String city, LocalDateTime date) {
+        User newUser = createUser(name, surname, active, email, city, date);
 
         StringBuilder dataToWrite = new StringBuilder("[");
 
         this.users.add(newUser);
 
+        try {
         //Here i overwrite all the users
         for (User user : this.users)
             dataToWrite.append(gson.toJson(user)).append(",").append("\n");
@@ -91,32 +101,14 @@ public class DatabaseRepository {
         FileWriter writer = new FileWriter(this.file);
         writer.write(dataToWrite.toString());
         writer.close();
+    }catch (Exception e){
+            System.out.println("error" + e);
+        }
     }
 
-    private User createUser(String name, String surname, boolean active, String email, String city) {
-        String date = format.format(new Date());
+    private User createUser(String name, String surname, boolean active, String email, String city, LocalDateTime d) {
+        String date = d.toString();
         return new User(name, surname, active, email, city, date);
     }
 
-    public ArrayList<String> menuToAddUser() throws IOException {
-        BufferedReader br = null;
-        br = new BufferedReader(new InputStreamReader(System.in));
-        ArrayList<String> userData = new ArrayList<>();
-        System.out.println("Enter the user's name:");
-        String dummy = br.readLine();
-        userData.add(dummy);
-        System.out.println("Enter the user's surname:");
-        dummy = br.readLine();
-        userData.add(dummy);
-        System.out.println("Enter 'true' or 'false' to the activate attribute:");
-        dummy = br.readLine();
-        userData.add(dummy);
-        System.out.println("Enter the user's email:");
-        dummy = br.readLine();
-        userData.add(dummy);
-        System.out.println("Enter the user's city:");
-        dummy = br.readLine();
-        userData.add(dummy);
-        return userData;
-    }
 }

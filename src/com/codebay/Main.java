@@ -1,6 +1,6 @@
 package com.codebay;
 
-import com.codebay.menu.Menu;
+import com.codebay.Menu.Menu;
 
 import java.io.IOException;
 import java.text.ParseException;

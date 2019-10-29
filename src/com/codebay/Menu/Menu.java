@@ -1,4 +1,4 @@
-package com.codebay.menu;
+package com.codebay.Menu;
 
 import com.codebay.DatabaseController.DatabaseController;
 
@@ -17,10 +17,7 @@ public class Menu {
             DatabaseController controller = new DatabaseController(path);
             handleMenu(controller);
         } catch (Exception e) {
-            if (e == IOException) {
-                System.out.println("Error. IOException");
-                System.exit(-1);
-            }
+            System.out.println("Error. IOException");
         }
     }
 
@@ -34,10 +31,7 @@ public class Menu {
                 controller.dispatch(option);
             } while (option == 1 || option == 2 || option == 3 || option == 4);
         } catch (Exception e) {
-            if (e == IOException) {
-                System.out.println("Error. IOException");
-                System.exit(-1);
-            }
+            System.out.println(e);
         }
     }
 
@@ -62,10 +56,7 @@ public class Menu {
                 System.exit(-1);
             }
         } catch (Exception e) {
-            if (e == IOException) {
-                System.out.println("Error. IOException");
-                System.exit(-1);
-            }
+            System.out.println("Error. IOException");
         }
         return "";
     }
