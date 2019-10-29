@@ -4,9 +4,10 @@ import com.codebay.User.User;
 import com.google.gson.Gson;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,11 +16,10 @@ import java.util.Date;
 
 public class DatabaseRepository {
 
-    static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
     private ArrayList<User> users = new ArrayList<>();
     private String file;
     private Gson gson = new Gson();
-    private SimpleDateFormat format = new SimpleDateFormat();
+
 
     public DatabaseRepository(String file) {
         this.file = file;
@@ -65,21 +65,23 @@ public class DatabaseRepository {
         }
     }
 
-    //Refactor here to LocalDateTime
-    public void listByCreationDate(boolean ascending) throws ParseException {
-        ArrayList<Date> dates = new ArrayList<>();
-
-        for (User user : users)
-            dates.add(format.parse(user.creationDate));
+    public void listByCreationDate(boolean ascending) {
+        ArrayList<LocalDateTime> dates = new ArrayList<>();
+        for (User user : users) {
+            LocalDateTime date = LocalDateTime.parse(user.creationDate);
+            dates.add(date);
+        }
         if (ascending)
             Collections.sort(dates);
         else
             dates.sort(Collections.reverseOrder());
 
-        for (Date date : dates)
-            for (User user : users)
-                if (date.compareTo(format.parse(user.creationDate)) == 0)
+        for (LocalDateTime date : dates)
+            for (User user : users){
+                LocalDateTime dateUser = LocalDateTime.parse(user.creationDate);
+                if (date.compareTo(dateUser) == 0)
                     System.out.println(user);
+            }
     }
 
     public void addUser(String name, String surname, boolean active, String email, String city, LocalDateTime date) {

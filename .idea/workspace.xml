@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1be466b9-a467-4198-b9d6-785a8fe5a985" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/codebay/Helper/Helper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JavaTest/com/codebay/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaTest/com/codebay/test.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/codebay/DatabaseController/DatabaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/DatabaseController/DatabaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/codebay/DatabaseRepository/DatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/DatabaseRepository/DatabaseRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/codebay/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/codebay/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/Menu/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/codebay/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/codebay/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/codebay/User/User.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -14,7 +14,7 @@ public class DatabaseController {
     private DatabaseRepository database;
     private BufferedReader br;
 
-    public DatabaseController(String path) throws IOException {
+    public DatabaseController(String path){
         database = new DatabaseRepository(path);
         try {
             this.br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,7 +23,7 @@ public class DatabaseController {
         }
     }
 
-    public void dispatch(int option) throws IOException {
+    public void dispatch(int option) {
         switch (option) {
             case 1:
                 listActiveUsers();
@@ -101,7 +101,7 @@ public class DatabaseController {
                 error = false;
                 System.out.println("Enter the user's " + type + " : ");
                 data = br.readLine();
-                if (Helper.containsNumbers(data)) {//doesnt work :(
+                if (Helper.containsNumbers(data)) { //doesnt work :(
                     System.out.println("Please enter a " + type + " without numbers");
                     error = true;
                 }
@@ -179,6 +179,7 @@ public class DatabaseController {
 
     private boolean getSortedBy() {
         String option = "";
+        boolean op = false;
         boolean error = true;
         try {
             while (error) {
@@ -189,8 +190,11 @@ public class DatabaseController {
                     System.out.println("Enter a correct option");
                     error = true;
                 }
+                else {
+                    op = option.equals("ascending");
+                }
             }
-            return Boolean.parseBoolean(option);
+            return op;
         } catch (Exception e) {
             System.out.println(e);
         }
